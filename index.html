@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-User Chat App</title>
+  <link rel="stylesheet" href="chat.css" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- Auth Section -->
+    <div id="auth-section" class="active">
+      <div id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="login-username" placeholder="Username" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button id="login-btn">Login</button>
+        <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+      </div>
+
+      <div id="register-form" class="hidden">
+        <h2>Register</h2>
+        <input type="text" id="register-username" placeholder="Username" required />
+        <input type="password" id="register-password" placeholder="Password" required />
+        <button id="register-btn">Register</button>
+        <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+      </div>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chat-section" class="hidden">
+      <button id="toggle-sidebar-btn">☰</button>
+      <div id="sidebar" class="closed">
+        <div id="user-info">
+          <span id="current-username"></span>
+          <button id="logout-btn">Logout</button>
+        </div>
+        <div id="rooms">
+          <h3>Chat Rooms</h3>
+          <ul id="room-list">
+            <li data-room="general">General</li>
+            <li data-room="random">Random</li>
+            <li data-room="tech">Tech</li>
+          </ul>
+          <div id="create-room">
+            <input type="text" id="new-room-name" placeholder="New room name" />
+            <button id="create-room-btn">Create</button>
+          </div>
+
+          <button id="toggle-active-users">Show Active Users</button>
+          <div id="active-users-container" class="hidden">
+            <h4>Active Users (<span id="active-count">0</span>)</h4>
+            <ul id="active-user-list"></ul>
+          </div>
+
+        </div>
+      </div>
+      <div id="chat-container">
+        <div id="chat-header">
+          <h2 id="current-room">General</h2>
+        </div>
+        <div id="messages"></div>
+        <div id="message-form">
+          <input type="text" id="message-input" placeholder="Type your message..." autocomplete="off" />
+          <button id="send-btn">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    const toggleActiveBtn = document.getElementById('toggle-active-users');
+    const activeUsersContainer = document.getElementById('active-users-container');
+
+    toggleActiveBtn.addEventListener('click', () => {
+      activeUsersContainer.classList.toggle('hidden');
+
+      if (!activeUsersContainer.classList.contains('hidden')) {
+        toggleActiveBtn.textContent = 'Hide Active Users';
+        updateActiveUsersUI();
+      } else {
+        toggleActiveBtn.textContent = 'Show Active Users';
+      }
+    });
+
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
